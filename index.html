@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--
+   index.html - Math Defender HTML 5 index page
+
+   Copyright (c) 2011 Robin Norwood <robin.norwood@gmail.com>
+
+      This file is part of Math Defender.
+
+    Math Defender is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Math Defender is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Math Defender.  If not, see <http://www.gnu.org/licenses/>.
+-->
+  <head>
+    <title>Math Defender</title>
+    <meta name="description" content="Math Defender"/>
+    <meta name="author" content="Robin Norwood"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link href="css/resets.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+
+    <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <canvas id="game_canvas"/>
+
+  <!-- Images here -->
+
+    <img class="sprite" id="launcher" src="sprites/launcher.png"/>
+    <img class="sprite" id="gun" src="sprites/gun.png"/>
+    <img class="sprite" id="star" src="sprites/star.png"/>
+
+  <!-- Javascript here -->
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/sprite.js"></script>
+    <script type="text/javascript" src="js/screen.js"></script>
+    <script type="text/javascript" src="js/launcher.js"></script>
+    <script type="text/javascript" src="js/star.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/defender.js"></script>
+  </body>
+
+</html>
