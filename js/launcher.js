@@ -15,6 +15,12 @@ var Launcher = function (x, y) {
 
 Launcher.prototype = {
     update: function (elapsed, state) {
+        if (state.keysdown.length) {
+            console.log("KEYSDOWN: " + state.keysdown);
+        }
+        if (state.keysup.length) {
+            console.log("KEYSUP: " + state.keysup);
+        }
         return true;
     },
     render: function (screen) {

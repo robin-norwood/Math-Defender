@@ -36,6 +36,11 @@ Defender.prototype = {
 
         controller.entities.launchers = launchers;
 
+        var numbers = [];
+        numbers[0] = new NumberButton(50,100,"0");
+
+        controller.entities.numbers = numbers;
+
         return {width: 1600,
                 height: 1200
                }; // config
