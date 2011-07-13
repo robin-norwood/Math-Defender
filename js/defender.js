@@ -50,6 +50,8 @@ Defender.prototype = {
 
         controller.entities.numbers = numbers;
 
+        controller.entities.equation = new Equation(25, 1100);
+
         return {width: 1600,
                 height: 1200
                }; // config

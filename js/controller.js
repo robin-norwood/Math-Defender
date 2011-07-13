@@ -24,7 +24,6 @@ var Controller = function (game) {
     this.state = { "keysdown": [],
                    "keyspressed": [],
                    "pointerpos": {x: -1, y: -1},
-                   "pointerup": true,
                    "pointerdown": false,
                    "pointerclicked": false
                  };
