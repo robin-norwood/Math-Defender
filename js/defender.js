@@ -37,7 +37,16 @@ Defender.prototype = {
         controller.entities.launchers = launchers;
 
         var numbers = [];
-        numbers[0] = new NumberButton(50,100,"0");
+        var numberX = 75;
+        var numberY = 125;
+        for (i=0; i<10; i++) {
+            numbers[i] = new NumberButton(numberX,numberY, i.toString());
+            numberY += 200;
+            if (i == 4) {
+                numberY = 125;
+                numberX += 125;
+            }
+        }
 
         controller.entities.numbers = numbers;
 
@@ -46,6 +55,12 @@ Defender.prototype = {
                }; // config
     },
     loopCallback: function (controller, elapsed) {
+        if (controller.state.keysdown.length) {
+            console.log("KEYSDOWN: " + controller.state.keysdown);
+        }
+        if (controller.state.keyspressed.length) {
+            console.log("KEYSPRESSED: " + controller.state.keyspressed);
+        }
         return true; // keep running
     }
 };
