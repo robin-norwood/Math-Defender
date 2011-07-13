@@ -22,7 +22,11 @@ window.requestAnimFrame = (function () {
 var Controller = function (game) {
     this.entities = {};
     this.state = { "keysdown": [],
-                   "keysup": []
+                   "keyspressed": [],
+                   "pointerpos": undefined,
+                   "pointerup": true,
+                   "pointerdown": false,
+                   "pointerclicked": false
                  };
 
     this.game = game;
@@ -51,8 +55,11 @@ var Controller = function (game) {
 
         self.render(self.screen); // draw all entities.
 
-        self.state = { "keysdown": [],
-                       "keysup": []
+        self.state = { "keysdown": self.state.keysdown,
+                       "keyspressed": [],
+                       "pointerpos": self.state.pointerpos,
+                       "pointerdown": self.state.pointerdown,
+                       "pointerclicked": false
                      };
 
         if (cont) {
@@ -73,18 +80,19 @@ Controller.prototype = {
         var self = this;
 
         // Bind handlers
-        $(this.screen._canvas).bind('mousedown', function (e) { return self.startDrag(e); });
-        $(this.screen._canvas).bind('mouseup', function (e) { return self.stopDrag(e); });
-        $(this.screen._canvas).bind('mousemove', function (e) { return self.doDrag(e); });
+        $(this.screen._canvas).bind('mousedown', function (e) { return self.mouseDown(e); });
+        $(this.screen._canvas).bind('mousemove', function (e) { return self.mouseMove(e); });
+        $(this.screen._canvas).bind('mouseup', function (e) { return self.mouseUp(e); });
+        $(this.screen._canvas).bind('mouseout', function (e) { return self.mouseOut(e); });
 
         /* Thanks to http://www.sitepen.com/blog/2008/07/10/touching-and-gesturing-on-the-iphone/
          * for 'splaining this */
 
-        $(this.screen._canvas).bind('touchstart', function (e) { return self.startDrag(e); });
-        $(this.screen._canvas).bind('touchend', function (e) { return self.stopDrag(e); });
-        $(this.screen._canvas).bind('touchmove', function (e) { return self.doDrag(e); });
+        $(this.screen._canvas).bind('touchstart', function (e) { return self.touchStart(e); });
+        $(this.screen._canvas).bind('touchmove', function (e) { return self.touchMove(e); });
+        $(this.screen._canvas).bind('touchend', function (e) { return self.touchEnd(e); });
 
-        $(this.screen._canvas).bind('touchcancel', function (e) { return self.stopDrag(e); });
+        $(this.screen._canvas).bind('touchcancel', function (e) { return self.touchCancel(e); });
 
         $(window).bind('keydown', function (e) { return self.key(e); });
         $(window).bind('keyup', function (e) { return self.key(e); });
@@ -117,34 +125,59 @@ Controller.prototype = {
     key: function (event) {
         return this.keyhandler.eventToState(event, this.state);
     },
-    startDrag: function (event) {
-        var theObj = event;
-        if (event.originalEvent.changedTouches) { // single touch for now.
-            theObj = event.originalEvent.changedTouches[0];
-        }
-
-        this.clickPos = Utils.getRelPos(theObj, this.screen._canvas);
-        this.dragging = true;
-
-        event.preventDefault();
-
-        return false;
-    },
-    doDrag: function (event) {
-        var theObj = event;
-        if (event.originalEvent.changedTouches) {
-            theObj = event.originalEvent.changedTouches[0];
-        }
-
-        var pos = Utils.getRelPos(theObj, this.screen._canvas);
+    mouseDown: function (event) {
+        this.state.pointerdown = true;
 
         event.preventDefault();
         return false;
     },
-    stopDrag: function (event) {
-        this.clickPos = {x: undefined, y: undefined};
-        this.dragging = false;
-        this.origAngle = undefined;
+    mouseMove: function (event) {
+        this.state.pointerpos = Utils.getRelPos(event, this.screen._canvas);
+
+        event.preventDefault();
+        return false;
+    },
+    mouseUp: function (event) {
+        if (this.state.pointerdown) {
+            this.state.pointerclicked = true;
+            this.state.pointerdown = false;
+        }
+
+        event.preventDefault();
+        return false;
+    },
+    mouseOut: function (event) {
+        this.state.pointerdown = false;
+
+        event.preventDefault();
+        return false;
+    },
+    touchStart: function (event) {
+        var theTouch = event.originalEvent.changedTouches[0];
+
+        this.state.pointerpos = Utils.getRelPos(theTouch, this.screen._canvas);
+        this.state.pointerdown = true;
+
+        event.preventDefault();
+        return false;
+    },
+    touchMove: function (event) {
+        var theTouch = event.originalEvent.changedTouches[0];
+
+        this.state.pointerpos = Utils.getRelPos(theTouch, this.screen._canvas);
+
+        event.preventDefault();
+        return false;
+    },
+    touchEnd: function (event) {
+        this.state.pointerdown = false;
+        this.state.pointerclicked = true;
+
+        event.preventDefault();
+        return false;
+    },
+    touchCancel: function (event) {
+        this.state.pointerdown = false;
 
         event.preventDefault();
         return false;
