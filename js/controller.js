@@ -23,7 +23,7 @@ var Controller = function (game) {
     this.entities = {};
     this.state = { "keysdown": [],
                    "keyspressed": [],
-                   "pointerpos": undefined,
+                   "pointerpos": {x: -1, y: -1},
                    "pointerup": true,
                    "pointerdown": false,
                    "pointerclicked": false
@@ -132,7 +132,7 @@ Controller.prototype = {
         return false;
     },
     mouseMove: function (event) {
-        this.state.pointerpos = Utils.getRelPos(event, this.screen._canvas);
+        this.state.pointerpos = this.screen.getPos(event);
 
         event.preventDefault();
         return false;
@@ -155,7 +155,7 @@ Controller.prototype = {
     touchStart: function (event) {
         var theTouch = event.originalEvent.changedTouches[0];
 
-        this.state.pointerpos = Utils.getRelPos(theTouch, this.screen._canvas);
+        this.state.pointerpos = this.screen.getPos(theTouch);
         this.state.pointerdown = true;
 
         event.preventDefault();
@@ -164,7 +164,7 @@ Controller.prototype = {
     touchMove: function (event) {
         var theTouch = event.originalEvent.changedTouches[0];
 
-        this.state.pointerpos = Utils.getRelPos(theTouch, this.screen._canvas);
+        this.state.pointerpos = this.screen.getPos(theTouch);
 
         event.preventDefault();
         return false;

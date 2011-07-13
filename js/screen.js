@@ -40,9 +40,13 @@ Screen.prototype = {
     setSize: function (width, height) {
         this.width = width;
         this.height = height;
-        var x_factor = this._canvas.width / width;
-        var y_factor = this._canvas.height / height;
+        this.x_factor = this._canvas.width / width;
+        this.y_factor = this._canvas.height / height;
 
-        this.context.scale(x_factor, y_factor);
+        this.context.scale(this.x_factor, this.y_factor);
+    },
+    getPos: function (event) {
+        var relPos = Utils.getRelPos(event, this._canvas);
+        return { x: relPos.x / this.x_factor, y: relPos.y / this.y_factor };
     }
 };

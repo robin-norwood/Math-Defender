@@ -18,16 +18,42 @@ NumberButton.prototype = {
         this.x = this.origX;
         this.y = this.origY;
 
+        var hovering = false;
+        var pressed = false;
+        var clicked = false;
+
+        if (state.pointerpos.x > this.x - 50 &&
+            state.pointerpos.x < this.x + 50 &&
+            state.pointerpos.y > this.y - 100 &&
+            state.pointerpos.y < this.y + 25) {
+            hovering = true;
+        }
+
         if (state.keysdown.indexOf(this.num) != -1) {
-            this.color = "crimson";
-            this.x += 4;
-            this.y += 4;
+            pressed = true;
         }
+
         if (state.keyspressed.indexOf(this.num) != -1) {
+            clicked = true;
+        }
+
+        if (hovering && state.pointerdown) {
+            pressed = true;
+        }
+
+        if (hovering && state.pointerclicked) {
+            clicked = true;
+        }
+
+        if (hovering || pressed || clicked) {
             this.color = "crimson";
+        }
+
+        if (pressed || clicked) {
             this.x += 4;
             this.y += 4;
         }
+
         return true;
     },
     render: function (screen) {
