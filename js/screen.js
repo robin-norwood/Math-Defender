@@ -35,9 +35,11 @@ Screen.prototype = {
                               );
     },
     clear: function () {
-        this.context.clearRect(0, 0, this._canvas.width, this._canvas.height);
+        this.context.clearRect(0, 0, this.width, this.height);
     },
     setSize: function (width, height) {
+        this.width = width;
+        this.height = height;
         var x_factor = this._canvas.width / width;
         var y_factor = this._canvas.height / height;
 
