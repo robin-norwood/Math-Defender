@@ -83,13 +83,21 @@ Keyhandler.prototype = {
             else {
                 letter = letter.toLowerCase();
             }
-        }
 
-        if (event.type == 'keydown') {
-            state.keysdown.push(letter);
-        }
-        if (event.type == 'keyup') {
-            state.keysup.push(letter);
+            var idx = state.keysdown.indexOf(letter);
+            if (event.type == 'keydown' && idx == -1) {
+                state.keysdown.push(letter);
+            }
+            if (event.type == 'keyup') {
+                if (idx != -1) {
+                    state.keysdown = $.grep(state.keysdown,
+                                            function (elem, targetIdx) {
+                                                return idx != targetIdx && elem != undefined;
+                                            });
+                    delete state.keysdown[idx];
+                }
+                state.keyspressed.push(letter);
+            }
         }
 
         return false;
