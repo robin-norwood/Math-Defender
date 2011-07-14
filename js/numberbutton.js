@@ -54,6 +54,10 @@ NumberButton.prototype = {
             this.y += 4;
         }
 
+        if (clicked) {
+            state.digit = this.num;
+        }
+
         return true;
     },
     render: function (screen) {
