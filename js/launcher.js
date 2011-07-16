@@ -26,6 +26,7 @@ Launcher.prototype = {
     update: function (elapsed, state) {
         if (this.active && state.gamestate.fireLauncher) {
             this.log("FIRE");
+            state.gamestate.fireLauncher = false;
             state.gamestate.wizardGoHome = true;
             this.fire(state);
         }
@@ -53,6 +54,7 @@ Launcher.prototype = {
         if (state.gamestate.activateLauncher && this.loaded) {
             state.gamestate.activateLauncher = false;
             this.active = true;
+            state.gamestate.wizardGoHome = false;
             state.gamestate.wizardGo = {x: this.x + 40, y: this.y + 140};
             this.log("ACTIVE");
         }
