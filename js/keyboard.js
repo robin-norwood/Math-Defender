@@ -43,14 +43,15 @@ var Keyhandler = function () {
         221: "]",
         220: "\\",
         222: "'",
+        27: "esc",
         32: " ",
-        37: "LEFT",
-        38: "UP",
-        39: "RIGHT",
-        40: "DOWN",
-        46: "DEL",
-        8: "BACKSPACE",
-        9: "TAB"
+        37: "left",
+        38: "up",
+        39: "right",
+        40: "down",
+        46: "del",
+        8: "backspace",
+        9: "tab"
     };
 };
 

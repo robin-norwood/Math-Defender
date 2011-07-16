@@ -24,8 +24,8 @@ NumberButton.prototype = {
 
         if (state.pointerpos.x > this.x - 50 &&
             state.pointerpos.x < this.x + 50 &&
-            state.pointerpos.y > this.y - 100 &&
-            state.pointerpos.y < this.y + 25) {
+            state.pointerpos.y > this.y - 125 &&
+            state.pointerpos.y < this.y + 50) {
             hovering = true;
         }
 
@@ -55,7 +55,7 @@ NumberButton.prototype = {
         }
 
         if (clicked) {
-            state.digit = this.num;
+            state.gamestate.digit = this.num;
         }
 
         return true;
@@ -65,11 +65,11 @@ NumberButton.prototype = {
         screen.context.strokeStyle = this.color;
         screen.context.fillStyle = this.color;
         screen.context.beginPath();
-        screen.context.moveTo(this.x - 50, this.y - 100);
-        screen.context.lineTo(this.x - 50, this.y + 25);
-        screen.context.lineTo(this.x + 50, this.y + 25);
-        screen.context.lineTo(this.x + 50, this.y - 100);
-        screen.context.lineTo(this.x - 50, this.y - 100);
+        screen.context.moveTo(this.x - 50, this.y - 125);
+        screen.context.lineTo(this.x - 50, this.y + 50);
+        screen.context.lineTo(this.x + 50, this.y + 50);
+        screen.context.lineTo(this.x + 50, this.y - 125);
+        screen.context.lineTo(this.x - 50, this.y - 125);
         screen.context.stroke();
 
         screen.context.font = 'bold 100px mono';

@@ -35,15 +35,18 @@ Defender.prototype = {
         });
 
         controller.entities.launchers = launchers;
+        controller.state.gamestate.activateLauncher = true;
+        controller.state.gamestate.prepareLauncher = true;
 
         var numbers = [];
         var numberX = 75;
-        var numberY = 125;
+        var numberY = 150;
+
         for (i=0; i<10; i++) {
             numbers[i] = new NumberButton(numberX,numberY, i.toString());
             numberY += 200;
             if (i == 4) {
-                numberY = 125;
+                numberY = 150;
                 numberX += 125;
             }
         }
@@ -57,12 +60,6 @@ Defender.prototype = {
                }; // config
     },
     loopCallback: function (controller, elapsed) {
-        if (controller.state.keysdown.length) {
-            console.log("KEYSDOWN: " + controller.state.keysdown);
-        }
-        if (controller.state.keyspressed.length) {
-            console.log("KEYSPRESSED: " + controller.state.keyspressed);
-        }
         return true; // keep running
     }
 };

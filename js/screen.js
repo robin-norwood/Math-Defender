@@ -13,6 +13,11 @@ var Screen = function (canvas, width, height) {
 };
 
 Screen.prototype = {
+    log: function (msg) {
+        if (console) {
+            console.log(msg);
+        }
+    },
     blit: function (sprite, frameNum, loc, size) {
         // Blit a sprite onto the current context.
         //
@@ -23,6 +28,7 @@ Screen.prototype = {
         if (!size) {
             size = {w: sprite.w, h:sprite.h};
         }
+
         this.context.drawImage(sprite.src_img,
                                sprite.frames[frameNum].x,
                                sprite.frames[frameNum].y,

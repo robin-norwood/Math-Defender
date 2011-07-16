@@ -299,16 +299,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.4559706"
-     inkscape:cx="110.76289"
-     inkscape:cy="122.37425"
+     inkscape:zoom="19.647765"
+     inkscape:cx="-137.56544"
+     inkscape:cy="208.69705"
      inkscape:current-layer="layer1"
      id="namedview2989"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1141"
      inkscape:window-x="0"
-     inkscape:window-y="46"
+     inkscape:window-y="26"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2991">
@@ -3253,29 +3253,35 @@
        inkscape:export-ydpi="223.12"
        inkscape:export-filename="/home/robin.norwood/git/math_defender/sprites/star.png" />
     <g
-       id="g5547"
-       inkscape:export-filename="/home/robin.norwood/git/math_defender/sprites/gun.png"
-       inkscape:export-xdpi="145.94595"
-       inkscape:export-ydpi="145.94595"
-       transform="translate(-111.97203,-16.28684)">
+       id="g3424"
+       transform="translate(0,1.9229431)"
+       inkscape:export-filename="/home/robin.norwood/git/math_defender/g3420.png"
+       inkscape:export-xdpi="157.45"
+       inkscape:export-ydpi="157.45">
       <rect
+         inkscape:export-ydpi="146.25"
+         inkscape:export-xdpi="146.25"
+         inkscape:export-filename="/home/robin.norwood/git/math_defender/gun2.png"
          ry="2.6666667"
          rx="2"
-         y="511.7858"
-         x="-34.873283"
+         y="495.49896"
+         x="-146.84531"
          height="74"
          width="16"
          id="rect3162-1-1"
          style="fill:#7f7f7f;fill-opacity:1;stroke:none" />
       <rect
+         inkscape:export-ydpi="146.25"
+         inkscape:export-xdpi="146.25"
+         inkscape:export-filename="/home/robin.norwood/git/math_defender/gun2.png"
          rx="2"
          ry="2.7272727"
          style="fill:#ee0d0d;fill-opacity:1;stroke:none"
          id="rect3164-7-9"
          width="12"
          height="69.375"
-         x="-32.873283"
-         y="514.09833" />
+         x="-144.84531"
+         y="497.81149" />
     </g>
     <g
        id="g5513"
@@ -3644,6 +3650,36 @@
          width="56.617966"
          id="rect3934-0-9"
          style="fill:#fee1e1;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.09249616;stroke-opacity:1" />
+    </g>
+    <g
+       id="g3420"
+       inkscape:export-xdpi="157.45"
+       inkscape:export-ydpi="157.45"
+       transform="translate(0,2)">
+      <rect
+         inkscape:export-ydpi="146.25"
+         inkscape:export-xdpi="146.25"
+         inkscape:export-filename="/home/robin.norwood/git/math_defender/gun2.png"
+         ry="2.6666667"
+         rx="2"
+         y="495.42191"
+         x="-162.85512"
+         height="74"
+         width="16"
+         id="rect3162-1-1-8"
+         style="fill:#7f7f7f;fill-opacity:1;stroke:none" />
+      <rect
+         inkscape:export-ydpi="146.25"
+         inkscape:export-xdpi="146.25"
+         inkscape:export-filename="/home/robin.norwood/git/math_defender/gun2.png"
+         rx="2"
+         ry="2.7272727"
+         style="fill:#550000;fill-opacity:1;stroke:none"
+         id="rect3164-7-9-1"
+         width="12"
+         height="69.375"
+         x="-160.85512"
+         y="497.73444" />
     </g>
   </g>
 </svg>

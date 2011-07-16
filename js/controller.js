@@ -25,7 +25,8 @@ var Controller = function (game) {
                    "keyspressed": [],
                    "pointerpos": {x: -1, y: -1},
                    "pointerdown": false,
-                   "pointerclicked": false
+                   "pointerclicked": false,
+                   "gamestate": {}
                  };
 
     this.game = game;
@@ -58,7 +59,8 @@ var Controller = function (game) {
                        "keyspressed": [],
                        "pointerpos": self.state.pointerpos,
                        "pointerdown": self.state.pointerdown,
-                       "pointerclicked": false
+                       "pointerclicked": false,
+                       "gamestate": self.state.gamestate
                      };
 
         if (cont) {

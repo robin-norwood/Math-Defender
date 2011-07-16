@@ -18,8 +18,8 @@ var Sprite = function (img_id, // id of the img dom element
     for (var i=0; i<sprite_count; i++) {
         var offset = sprite_offset * sprite_size.w + i * sprite_size.w;
         this.frames.push({
-            x: offset % this.src_img.width,
-            y: Math.floor(offset / this.src_img.width) * sprite_size.w
+            y: Math.floor(offset / this.src_img.width) * sprite_size.w,
+            x: offset % this.src_img.width
         });
     }
 };

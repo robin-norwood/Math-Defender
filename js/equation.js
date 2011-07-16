@@ -14,25 +14,25 @@ var Equation = function (x, y) {
     this.limit = 19;
     this.solved = false;
     this.wrong = false;
-    this.wrongTimer = 0;
+    this.resetTimer = 0;
 
     this.generate();
     this.toSkip = Math.floor(Math.random() * 3);
-
-    this.color = "yellow";
 };
 
 Equation.prototype = {
     update: function (elapsed, state) {
-        if (state.digit) {
+        var digitStr = undefined;
+        if (state.gamestate.digit) {
+            digitStr = state.gamestate.digit.toString();
+            state.gamestate.digit = undefined;
+        }
+
+        if (digitStr && !this.solved) {
             if (this.wrong) {
-                this.wrongTimer = 0;
-                this.wrong = false;
-                this.input = "__";
-                this.color = "yellow";
+                this.reset();
             }
 
-            var digitStr = state.digit.toString();
             if (this.input[1] == "_") {
                 this.input = "_" + digitStr;
             }
@@ -44,32 +44,46 @@ Equation.prototype = {
             }
 
             this.checkSolved();
-
             if (this.solved) {
-                this.color = "green";
+                state.gamestate.loadLauncher = true;
             }
 
             if (this.wrong) {
-                this.color = "red";
-                this.wrongTimer = 2000;
+                this.resetTimer = 2000;
             }
         }
-        else if (this.wrong) {
-            this.wrongTimer -= elapsed;
+        else if (this.resetTimer) {
+            this.resetTimer -= elapsed;
 
-            if (this.wrongTimer <= 0) {
-                this.wrongTimer = 0;
-                this.wrong = false;
-                this.input = "__";
-                this.color = "yellow";
+            if (this.resetTimer <= 0) {
+                this.reset();
             }
+        }
+        else if (state.gamestate.resetEquation) {
+            state.gamestate.resetEquation = false;
+            this.resetTimer = 500;
+        };
+
+        if (!this.solved && state.keyspressed.indexOf('esc') != -1) {
+            this.reset();
+        }
+        if (state.keyspressed.indexOf('backspace') != -1) {
+            this.input = "_" + this.input[0];
         }
 
         return true;
     },
     render: function (screen) {
+        var color = "yellow";
+        if (this.solved) {
+            color = "green";
+        }
+        if (this.wrong) {
+            color = "red";
+        }
+
         screen.context.font = 'bold 50px mono';
-        screen.context.fillStyle = this.color;
+        screen.context.fillStyle = color;
         screen.context.textAlign = 'left';
         screen.context.translate(this.x, this.y);
 
@@ -103,5 +117,14 @@ Equation.prototype = {
                  this.toSkip == 2 && this.addends[0] + this.addends[1] < num) {
             this.wrong = true;
         }
+    },
+    reset: function () {
+        if (this.solved) {
+            this.generate();
+        }
+        this.resetTimer = 0;
+        this.wrong = false;
+        this.solved = false;
+        this.input = "__";
     }
 };
