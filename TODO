@@ -1,1 +1,26 @@
-http://www.html5rocks.com/en/tutorials/detection/index.html
+o Make wizard move smoothly from gun to gun.
+
+o Make guns fire
+
+o Do incoming missiles
+
+o ...and collision between gun explosion and missiles
+
+o ...and between missiles and launchers
+
+o Audio
+
+o Animations
+
+o 'level' framework
+
+o Intro and ending
+
+o Form factor detection:
+  http://www.html5rocks.com/en/tutorials/detection/index.html
+
+
+DONE
+
+o Show 'wizard' ready to fire gun.
+

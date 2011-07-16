@@ -54,5 +54,8 @@ Screen.prototype = {
     getPos: function (event) {
         var relPos = Utils.getRelPos(event, this._canvas);
         return { x: relPos.x / this.x_factor, y: relPos.y / this.y_factor };
+    },
+    getCanvas: function () {
+        return this._canvas;
     }
 };

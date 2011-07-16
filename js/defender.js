@@ -55,6 +55,8 @@ Defender.prototype = {
 
         controller.entities.equation = new Equation(25, 1100);
 
+        controller.entities.wizard = new Wizard(10, 1120);
+        controller.entities.field = new Field(300, 0, 1600, 960);
         return {width: 1600,
                 height: 1200
                }; // config
