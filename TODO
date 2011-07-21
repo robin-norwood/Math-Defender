@@ -1,12 +1,12 @@
 o Make wizard move smoothly from gun to gun.
 
-o Make guns fire
+o Do incoming asteroids
 
-o Do incoming missiles
+o Make missiles explode
 
-o ...and collision between gun explosion and missiles
+o ...and collision between gun explosion and asteroids
 
-o ...and between missiles and launchers
+o ...and between asteroids and launchers
 
 o Audio
 
@@ -23,4 +23,6 @@ o Form factor detection:
 DONE
 
 o Show 'wizard' ready to fire gun.
+
+o Make guns fire
 

@@ -1,5 +1,5 @@
 /*
-   defender.js - Prototype for the controller object and launch code
+  launcher.js - Prototype for the launchers
 
    Copyright (c) 2011 Robin Norwood <robin.norwood@gmail.com>
  */
@@ -8,7 +8,7 @@ var Launcher = function (x, y) {
     this.x = x;
     this.y = y;
 
-    this.angle = 0;
+    this.angle = -Math.PI/2;
     this.launcherSprite = new Sprite('launcher', {w: 80, h: 80}, 0, 1);
     this.gunSprite = new Sprite('gun', {w: 28, h: 60}, 0, 2);
 
@@ -63,15 +63,23 @@ Launcher.prototype = {
     },
     render: function (screen) {
         screen.context.save();
+
+        // Because sprites 'blit' relative to the upper left corner
+        // *within* the rotated context, we have to fudge a bit to get
+        // the gun in the right place.
+        // NTS: Try to abstract this...
         screen.context.translate(this.x + 40, this.y + 60);
-        screen.context.rotate(this.angle);
+
+        // Also this.angle is relative to 'due right', but the gun
+        // sprite original is in the upright position:
+        screen.context.rotate(this.angle + Math.PI/2);
 
         var whichGun = 0;
         if (this.loaded) {
             whichGun = 1;
         }
 
-        screen.blit(this.gunSprite, whichGun, {x: -13, y: -60});
+        screen.blit(this.gunSprite, whichGun, {x: -14, y: -60});
         screen.context.restore();
         screen.blit(this.launcherSprite, 0, {x: this.x, y: this.y + 40});
     },
@@ -79,6 +87,10 @@ Launcher.prototype = {
         this.loaded = false;
         state.gamestate.inactivateLauncher = true;
         state.gamestate.activateLauncher = true;
-        this.log("BLAM!");
+
+        this.angle = Utils.angle(this.x + 13, this.y + 60, state.pointerpos.x, state.pointerpos.y);
+        var dist = Math.sqrt(Math.pow(state.pointerpos.x - this.x, 2) + Math.pow(state.pointerpos.y - this.y, 2));
+
+        state.gamestate.fireMissile = new Missile(this.x, this.y, this.angle, 24, dist);
     }
 };

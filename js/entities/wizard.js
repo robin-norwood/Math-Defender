@@ -1,5 +1,5 @@
 /*
-   defender.js - Prototype for the controller object and launch code
+   wizard.js - Prototype for the wizard that fires the launchers
 
    Copyright (c) 2011 Robin Norwood <robin.norwood@gmail.com>
  */
@@ -28,13 +28,17 @@ Wizard.prototype = {
             this.y = wg.y;
         }
 
-        var home = state.gamestate.wizardGoHome;
+        var goHome = state.gamestate.wizardGoHome;
         state.gamestate.wizardGoHome = undefined;
 
-        if (home) {
+        if (goHome) {
             this.goHome();
         }
 
+        if (state.gamestate.fireLauncher && this.isHome()) {
+            // swallow firing events made when the wizard is at home.
+            state.gamestate.fireLauncher = undefined;
+        }
         return true;
     },
     render: function (screen) {
@@ -43,5 +47,12 @@ Wizard.prototype = {
     goHome: function () {
         this.x = this.homeX;
         this.y = this.homeY;
+    },
+    isHome: function () {
+        if (this.x == this.homeX && this.y == this.homeY) {
+            return true;
+        }
+
+        return false;
     }
 };

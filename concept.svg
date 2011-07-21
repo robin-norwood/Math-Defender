@@ -300,8 +300,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="19.647765"
-     inkscape:cx="-137.56544"
-     inkscape:cy="208.69705"
+     inkscape:cx="-323.1006"
+     inkscape:cy="494.12906"
      inkscape:current-layer="layer1"
      id="namedview2989"
      showgrid="false"
@@ -2478,7 +2478,10 @@
     </g>
     <g
        id="g4505-2-9"
-       transform="matrix(-0.27334026,-0.01117367,0.01117367,-0.27334026,391.08447,282.20883)">
+       transform="matrix(0.27356835,-3.2575537e-4,3.2575537e-4,0.27356835,-426.87453,138.65816)"
+       inkscape:export-filename="/home/robin.norwood/git/math_defender/sprites/missile.png"
+       inkscape:export-xdpi="162.46201"
+       inkscape:export-ydpi="162.46201">
       <g
          id="g4718">
         <ellipse

@@ -100,7 +100,11 @@ Controller.prototype = {
     },
     update: function (elapsed, state) {
         var updateEntity = function (entity) {
-            return entity.update(elapsed, state);
+            if (entity) {
+                return entity.update(elapsed, state);
+            }
+
+            return false;
         };
 
         Utils.deepGrep(updateEntity, this.entities);
@@ -112,10 +116,11 @@ Controller.prototype = {
         screen.clear();
 
         var renderEntity = function (entity) {
-            screen.context.save();
-            entity.render(screen);
-            screen.context.restore();
-
+            if (entity) {
+                screen.context.save();
+                entity.render(screen);
+                screen.context.restore();
+            }
             return true;
         };
 

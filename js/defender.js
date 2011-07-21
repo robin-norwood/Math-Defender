@@ -16,7 +16,7 @@ Defender.prototype = {
                  {x: 1347.5, y: 980}
                ]
     },
-    starConfig: {count: 15},
+    starConfig: {count: 30},
     initCallback: function (controller) {
         var stars = [];
         for (var i=0;i<this.starConfig.count;i++) {
@@ -57,11 +57,18 @@ Defender.prototype = {
 
         controller.entities.wizard = new Wizard(10, 1120);
         controller.entities.field = new Field(300, 0, 1600, 960);
+
+        controller.entities.missiles = [];
         return {width: 1600,
                 height: 1200
                }; // config
     },
     loopCallback: function (controller, elapsed) {
+        if (controller.state.gamestate.fireMissile) {
+            controller.entities.missiles.push(controller.state.gamestate.fireMissile);
+            controller.state.gamestate.fireMissile = undefined;
+        }
+
         return true; // keep running
     }
 };

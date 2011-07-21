@@ -19,7 +19,7 @@ Star.prototype = {
     render: function (screen) {
         screen.context.translate(this.x + 28, this.y + 28);
         screen.context.rotate(this.angle);
-        screen.blit(this.sprite, 0, {x: -28, y: -28});
+        screen.blit(this.sprite, 0, {x: -28, y: -28}, {w: 14, h: 14});
     },
     findSlot: function (stars) {
     }
