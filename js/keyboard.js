@@ -1,7 +1,7 @@
 /*
-   editor.js - Prototype for the editing mode
+   keyboard.js - Prototype for the keyboard input handling
 
-   Copyright (c) 2011 Robin Norwood <robin.norwood@gmail.com>
+   Copyright (c) 2012 Robin Norwood <robin.norwood@gmail.com>
  */
 "use strict";
 
@@ -63,7 +63,7 @@ Keyhandler.prototype = {
     },
     eventToState: function (event, state) {
         if (event.altKey || event.ctrlKey) {
-            return true; // don't intercept
+            return true; // don't intercept ctrl and alt
         }
         event.preventDefault();
 

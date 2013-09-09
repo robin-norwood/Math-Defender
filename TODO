@@ -1,28 +1,39 @@
-o Make wizard move smoothly from gun to gun.
+__for MVP__
+o Fix launcher reload bug(s)?
 
-o Do incoming asteroids
+o sound effects
 
-o Make missiles explode
+o Start screen
 
-o ...and collision between gun explosion and asteroids
+o End screen
 
-o ...and between asteroids and launchers
+o Score
 
-o Audio
+o Calibrade meteor speed/frequency
 
-o Animations
+
+
+
+__Big stuff__
+
+o Better Animations & graphics
 
 o 'level' framework
-
-o Intro and ending
 
 o Form factor detection:
   http://www.html5rocks.com/en/tutorials/detection/index.html
 
+o sync w/latest version of framework
 
-DONE
 
-o Show 'wizard' ready to fire gun.
 
-o Make guns fire
+__Little stuff__
+o Make wizard move smoothly from gun to gun, other animation smoothing/effects
 
+o Music
+
+
+
+__later stuff__
+
+o Social media integration

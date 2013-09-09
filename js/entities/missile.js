@@ -24,6 +24,7 @@ Missile.prototype = {
         }
     },
     update: function (elapsed, state) {
+        // FIXME: This tends to overshoot by a tiny bit
         var dx = Math.cos(this.angle) * this.speed;
         var dy = Math.sin(this.angle) * this.speed;
 
@@ -37,15 +38,20 @@ Missile.prototype = {
         }
         else {
             this.log("MISSILE BOOM");
+            state.gamestate.explosion = new Explosion(this.x, this.y);
+
             return false;
         }
     },
     render: function (screen) {
         screen.context.save();
         screen.context.globalCompositeOperation = 'destination-over';
-        screen.context.translate(this.x + 40, this.y + 60);
+
+        screen.context.translate(this.x, this.y);
         screen.context.rotate(this.angle + Math.PI/2);
-        screen.blit(this.missileSprite, 0, {x: -20, y: -45});
+
+        screen.blit(this.missileSprite, 0, {x:-20, y:0});
+
         screen.context.restore();
     }
 };

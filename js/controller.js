@@ -68,7 +68,9 @@ var Controller = function (game) {
         }
     };
 
-    animloop();
+    this.lastUpdateTime = (new Date()).getTime();
+
+    animloop(); // Start the main loop
 };
 
 Controller.prototype = {

@@ -4,7 +4,7 @@ var Util = function () {
 
 Util.prototype = {
     deepGrep: function (callback, objectOrArray) {
-        // Works like a 'grep' that unpacks arrays.
+        // Works like a 'grep' that unpacks arrays and objects
         //
         // The callback function is called like: callback(item)
         // If callback returns false, delete the item from the
@@ -12,29 +12,50 @@ Util.prototype = {
 
         var deleteList = [];
 
-        var isArray = function (thing) {
-            return thing &&
-                typeof thing.length === 'number' &&
-                !(thing.propertyIsEnumerable('length')) &&
-                typeof thing.splice === 'function';
-        };
-
         var self = this;
+
         $.each(objectOrArray, function (idx, item) {
-            if (isArray(item)) {
+            if (self.isArray(item)) {
                 self.deepGrep(callback, item);
             }
             else if (!callback(item)) {
-                deleteList.push(idx);
+                deleteList.push([idx, item]);
             }
+
+            if (self.isObject(item) &&
+                (self.isObject(item.entities) || self.isArray(item.entities))) {
+                self.deepGrep(callback, item.entities);
+            }
+
         });
 
-        $.each(deleteList, function (idx, item) {
-            if (typeof item.destroy == 'function') {
-                item.destroy();
+        if (self.isArray(objectOrArray)) {
+            deleteList.sort(function (a, b) {
+                return b[0] - a[0];
+            });
+        }
+
+        $.each(deleteList, function (idx, thing) {
+            if (self.isObject(thing[1]) && typeof thing[1].destroy == 'function') {
+                thing[1].destroy();
             }
-            delete objectOrArray[idx];
+
+            if (self.isArray(objectOrArray)) {
+                objectOrArray.splice(thing[0], 1);
+            }
+            else {
+                delete objectOrArray[thing[0]];
+            }
         });
+    },
+    isArray: function (thing) {
+        return thing &&
+            typeof thing.length === 'number' &&
+            !(thing.propertyIsEnumerable('length')) &&
+            typeof thing.splice === 'function';
+    },
+    isObject: function (thing) { // A "real" object, not an array. Oh, JavaScript...
+        return typeof thing == 'object' && (! this.isArray(thing));
     },
     getRelPos: function (e, obj) {
         // Get the relative position of the event inside the object
@@ -105,7 +126,7 @@ Util.prototype = {
         return {dir: newDir, speed: newSpeed};
     },
     angle: function(x0, y0, x1, y1) {
-        // Return the angle in radians between the horizontal axis and
+        // Return the angle in radintans between the horizontal axis and
         // a line through the given points
         var rx = x1 - x0;
         var ry = y1 - y0;
@@ -117,6 +138,9 @@ Util.prototype = {
         }
 
         return dir;
+    },
+    distance: function(x0, y0, x1, y1) {
+        return Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2));
     }
 };
 

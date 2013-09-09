@@ -1,7 +1,7 @@
 /*
   launcher.js - Prototype for the launchers
 
-   Copyright (c) 2011 Robin Norwood <robin.norwood@gmail.com>
+   Copyright (c) 2013 Robin Norwood <robin.norwood@gmail.com>
  */
 "use strict";
 var Launcher = function (x, y) {
@@ -15,6 +15,8 @@ var Launcher = function (x, y) {
     this.active = false; // The active launcher is the next to fire
     this.ready = false; // The ready launcher is the next to load
     this.loaded = false; // A loaded launcher is a candidate to become active
+
+    this.die = false;
 };
 
 Launcher.prototype = {
@@ -55,20 +57,30 @@ Launcher.prototype = {
             state.gamestate.activateLauncher = false;
             this.active = true;
             state.gamestate.wizardGoHome = false;
-            state.gamestate.wizardGo = {x: this.x + 40, y: this.y + 140};
+            state.gamestate.wizardGo = {x: this.x + 40, y: this.y + 80};
             this.log("ACTIVE");
         }
 
-        return true;
+        var alive = true;
+
+        if (this.die) {
+            alive = false;
+        }
+
+        return alive;
     },
     render: function (screen) {
         screen.context.save();
+
+        screen.blit(this.launcherSprite, 0, {x: this.x, y: this.y});
+
+        screen.context.globalCompositeOperation = 'destination-over';
 
         // Because sprites 'blit' relative to the upper left corner
         // *within* the rotated context, we have to fudge a bit to get
         // the gun in the right place.
         // NTS: Try to abstract this...
-        screen.context.translate(this.x + 40, this.y + 60);
+        screen.context.translate(this.x + 40, this.y + 20);
 
         // Also this.angle is relative to 'due right', but the gun
         // sprite original is in the upright position:
@@ -81,16 +93,15 @@ Launcher.prototype = {
 
         screen.blit(this.gunSprite, whichGun, {x: -14, y: -60});
         screen.context.restore();
-        screen.blit(this.launcherSprite, 0, {x: this.x, y: this.y + 40});
     },
     fire: function (state) {
         this.loaded = false;
         state.gamestate.inactivateLauncher = true;
         state.gamestate.activateLauncher = true;
 
-        this.angle = Utils.angle(this.x + 13, this.y + 60, state.pointerpos.x, state.pointerpos.y);
-        var dist = Math.sqrt(Math.pow(state.pointerpos.x - this.x, 2) + Math.pow(state.pointerpos.y - this.y, 2));
+        this.angle = Utils.angle(this.x + 14, this.y + 60, state.pointerpos.x, state.pointerpos.y);
+        var dist = Math.sqrt(Math.pow(state.pointerpos.x - this.x - 14, 2) + Math.pow(state.pointerpos.y - this.y - 60, 2));
 
-        state.gamestate.fireMissile = new Missile(this.x, this.y, this.angle, 24, dist);
+        state.gamestate.fireMissile = new Missile(this.x + 14, this.y + 60, this.angle, 24, dist);
     }
 };

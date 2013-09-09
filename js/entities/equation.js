@@ -1,7 +1,7 @@
 /*
    equation.js - Prototype for the controller object and launch code
 
-   Copyright (c) 2011 Robin Norwood <robin.norwood@gmail.com>
+   Copyright (c) 2013 Robin Norwood <robin.norwood@gmail.com>
  */
 "use strict";
 var Equation = function (x, y) {
@@ -78,7 +78,7 @@ Equation.prototype = {
         if (this.solved) {
             color = "green";
         }
-        if (this.wrong) {
+        else if (this.wrong) {
             color = "red";
         }
 

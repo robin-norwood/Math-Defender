@@ -1,7 +1,7 @@
 /*
    screen.js - Base class for screen.
 
-   Copyright (c) 2011 Robin Norwood <robin.norwood@gmail.com>
+   Copyright (c) 2012 Robin Norwood <robin.norwood@gmail.com>
  */
 
 "use strict";
